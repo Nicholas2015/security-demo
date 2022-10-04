@@ -1,33 +1,33 @@
 package com.example.securitydemo.config;
 
-import com.example.securitydemo.model.SimpleUser;
-import com.example.securitydemo.provider.CustomAuthenticationProvider;
-import com.example.securitydemo.service.InMemoryUserDetailsService;
+import com.example.securitydemo.provider.CustomAuthenticationProvider1;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.*;
+import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 import org.springframework.security.ldap.DefaultLdapUsernameToDnMapper;
 import org.springframework.security.ldap.DefaultSpringSecurityContextSource;
 import org.springframework.security.ldap.userdetails.LdapUserDetailsManager;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
+import org.springframework.security.web.SecurityFilterChain;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Nicholas Sun
  * @date 2022/09/24 22:06
  */
-//@Configuration
+@Configuration
+@EnableAsync
 public class GlobalConfig /*extends WebSecurityConfigurerAdapter*/ {
 
 //    @Override
@@ -40,13 +40,23 @@ public class GlobalConfig /*extends WebSecurityConfigurerAdapter*/ {
 //    }
 
     @Resource
-    private CustomAuthenticationProvider authenticationProvider;
+    private CustomAuthenticationProvider1 authenticationProvider;
 
- /*   @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-            auth.authenticationProvider(authenticationProvider);
+// @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//            auth.authenticationProvider(authenticationProvider);
+//    }
+
+
+//    @Bean
+    public InitializingBean initializingBean(){
+     return () -> SecurityContextHolder.setStrategyName(
+//             SecurityContextHolder.MODE_INHERITABLETHREADLOCAL
+             SecurityContextHolder.MODE_GLOBAL
+     );
     }
 
+    /*
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic();
@@ -54,7 +64,23 @@ public class GlobalConfig /*extends WebSecurityConfigurerAdapter*/ {
                 .anyRequest().authenticated();
     }*/
 
-    @Bean
+
+    private void testPasswordEncoder(){
+        PasswordEncoder encoder = NoOpPasswordEncoder.getInstance();
+        encoder = new StandardPasswordEncoder();
+        encoder = new Pbkdf2PasswordEncoder();
+        encoder = new Pbkdf2PasswordEncoder("secret");
+        encoder = new Pbkdf2PasswordEncoder("secret",185000,256);
+        encoder = new BCryptPasswordEncoder();
+        encoder = new SCryptPasswordEncoder();
+    }
+
+//    @Bean
+//    public SecurityFilterChain securityFilterChain() {
+//
+//    }
+
+//    @Bean
     public UserDetailsService userDetailsService(DataSource dataSource) {
 //        var userDetailsService = new InMemoryUserDetailsManager();
 //        var user = User.withUsername("nicholas").password("123456").authorities("read").build();
@@ -81,8 +107,13 @@ public class GlobalConfig /*extends WebSecurityConfigurerAdapter*/ {
         return manager;
     }
 
-    @Bean
+//    @Bean
     public PasswordEncoder passwordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
+//        return NoOpPasswordEncoder.getInstance();
+        Map<String,PasswordEncoder> encoder = new HashMap<>();
+        encoder.put("noop",NoOpPasswordEncoder.getInstance());
+        encoder.put("bcrypt",new BCryptPasswordEncoder());
+        encoder.put("scrypt",new SCryptPasswordEncoder());
+        return new DelegatingPasswordEncoder("bcrypt",encoder);
     }
 }
