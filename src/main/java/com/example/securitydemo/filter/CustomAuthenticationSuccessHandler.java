@@ -1,4 +1,4 @@
-package com.example.securitydemo.provider;
+package com.example.securitydemo.filter;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
