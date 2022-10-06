@@ -24,7 +24,8 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
                                         HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-        Optional<? extends GrantedAuthority> authority = authorities.stream().filter(a -> a.getAuthority().equals("read")).findFirst();
+        Optional<? extends GrantedAuthority> authority = authorities.stream()
+                .filter(a -> a.getAuthority().equals("read")).findFirst();
         if (authority.isPresent()){
             response.sendRedirect("/home");
         } else {

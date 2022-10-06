@@ -13,7 +13,7 @@ import java.util.Arrays;
  * @author Nicholas Sun
  * @date 2022/09/26 22:24
  */
-@Component
+//@Component
 public class CustomAuthenticationProvider1 implements AuthenticationProvider {
 
 
