@@ -2,6 +2,7 @@ package com.example.securitydemo.controller;
 
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.concurrent.DelegatingSecurityContextCallable;
+import org.springframework.security.concurrent.DelegatingSecurityContextExecutorService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -49,6 +50,21 @@ public class HelloController {
 //            return String.format("Ciao, %s!",service.submit(task).get());
             DelegatingSecurityContextCallable<String> callable = new DelegatingSecurityContextCallable<>(task);
             return String.format("Ciao, %s!",service.submit(callable).get());
+        }finally {
+            service.shutdown();
+        }
+    }
+
+    @GetMapping("/hola")
+    public String hola() throws Exception {
+        Callable<String> task = () -> {
+            SecurityContext context = SecurityContextHolder.getContext();
+            return context.getAuthentication().getName();
+        };
+        ExecutorService service = Executors.newCachedThreadPool();
+        service = new DelegatingSecurityContextExecutorService(service);
+        try {
+            return String.format("Hola, %s!",service.submit(task).get());
         }finally {
             service.shutdown();
         }

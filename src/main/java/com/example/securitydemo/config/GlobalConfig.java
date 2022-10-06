@@ -10,6 +10,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.*;
 import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 import org.springframework.security.ldap.DefaultLdapUsernameToDnMapper;
@@ -19,6 +24,9 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -105,6 +113,7 @@ public class GlobalConfig /*extends WebSecurityConfigurerAdapter*/ {
         manager.setUsernameMapper(new DefaultLdapUsernameToDnMapper("ou=groups","uid"));
         manager.setGroupSearchBase("ou=groups");
         return manager;
+
     }
 
 //    @Bean

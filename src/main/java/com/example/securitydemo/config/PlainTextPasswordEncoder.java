@@ -2,6 +2,10 @@ package com.example.securitydemo.config;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+/**
+ * @author Nicholas Sun
+ * @date 2022/10/02 10:30
+ */
 public class PlainTextPasswordEncoder implements PasswordEncoder {
 
     @Override
