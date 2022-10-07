@@ -12,10 +12,10 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
  * @author Nicholas Sun
  * @date 2022/09/26 22:43
  */
-//@Configuration
+@Configuration
 public class UserManagementConfig {
 
-//    @Bean
+    @Bean
     public UserDetailsService userDetailsService() {
         var userDetailsService = new InMemoryUserDetailsManager();
         var user = User.withUsername("nicholas")
@@ -26,7 +26,7 @@ public class UserManagementConfig {
         return userDetailsService;
     }
 
-//    @Bean
+    @Bean
     public PasswordEncoder passwordEncoder() {
         return NoOpPasswordEncoder.getInstance();
     }
