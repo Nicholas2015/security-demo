@@ -20,10 +20,7 @@ import java.util.Map;
  * @author Administrator
  */
 @Configuration
-public class ProjectConfig extends WebSecurityConfigurerAdapter {
-
-    @Resource
-    private CustomAuthenticationProvider customAuthenticationProvider;
+public class ProjectConfig {
 
 //    @Bean
 //    public BCryptPasswordEncoder bCryptPasswordEncoder() {
@@ -41,16 +38,5 @@ public class ProjectConfig extends WebSecurityConfigurerAdapter {
         encoders.put("bcrypt",new BCryptPasswordEncoder());
         encoders.put("scrypt",new SCryptPasswordEncoder());
         return new DelegatingPasswordEncoder("bcrypt",encoders);
-    }
-
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(customAuthenticationProvider);
-    }
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.formLogin().defaultSuccessUrl("/main", true);
-        http.authorizeRequests().anyRequest().authenticated();
     }
 }
