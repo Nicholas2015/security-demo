@@ -1,4 +1,4 @@
-package com.example.securitydemo.model;
+package com.example.demoorigional.model;
 
 import lombok.Data;
 

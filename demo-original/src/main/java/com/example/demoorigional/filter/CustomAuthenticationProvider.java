@@ -1,4 +1,4 @@
-package com.example.securitydemo.filter;
+package com.example.demoorigional.filter;
 
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;

@@ -1,4 +1,4 @@
-package com.example.securitydemo.controller;
+package com.example.demoorigional.controller;
 
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.concurrent.DelegatingSecurityContextCallable;

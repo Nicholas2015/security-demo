@@ -1,9 +1,8 @@
-package com.example.securitydemo.config;
+package com.example.demoorigional.config;
 
-import com.example.securitydemo.filter.CustomAuthenticationFailureHandler;
-import com.example.securitydemo.filter.CustomAuthenticationSuccessHandler;
+import com.example.demoorigional.filter.CustomAuthenticationFailureHandler;
+import com.example.demoorigional.filter.CustomAuthenticationSuccessHandler;
 import com.example.securitydemo.filter.CustomEntryPoint;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
