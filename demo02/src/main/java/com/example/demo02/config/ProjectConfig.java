@@ -23,8 +23,10 @@ public class ProjectConfig {
 //        UserDetails user2 = User.withUsername("jane").password("123456").authorities("WRITE").build();
 //        UserDetails user1 = User.withUsername("john").password("123456").authorities("read").build();
 //        UserDetails user2 = User.withUsername("jane").password("123456").authorities("write","read","delete").build();
-        UserDetails user1 = User.withUsername("john").password("123456").authorities("ROLE_ADMIN").build();
-        UserDetails user2 = User.withUsername("jane").password("123456").authorities("ROLE_MANAGER").build();
+//        UserDetails user1 = User.withUsername("john").password("123456").authorities("ROLE_ADMIN").build();
+//        UserDetails user2 = User.withUsername("jane").password("123456").authorities("ROLE_MANAGER").build();
+        UserDetails user1 = User.withUsername("john").password("123456").roles("ADMIN").build();
+        UserDetails user2 = User.withUsername("jane").password("123456").roles("MANAGER").build();
         manager.createUser(user1);
         manager.createUser(user2);
         return manager;
