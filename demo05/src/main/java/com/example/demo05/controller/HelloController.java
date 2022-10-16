@@ -1,0 +1,23 @@
+package com.example.demo05.controller;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+/**
+ * @author Nicholas Sun
+ * @date 2022/10/16 16:31
+ */
+@RestController
+public class HelloController {
+
+    @GetMapping("/hello")
+    public String getHello() {
+        return "Get Hello!";
+    }
+
+    @PostMapping("/hello")
+    public String postHello() {
+        return "Post Hello!";
+    }
+}
