@@ -1,11 +1,14 @@
-package com.example.demo06.security;
+package com.example.demo0601.security;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
 
-public class OtpAuthentication extends UsernamePasswordAuthenticationToken {
+/**
+ * @author Administrator
+ */
+public class  OtpAuthentication extends UsernamePasswordAuthenticationToken {
 
     public OtpAuthentication(Object principal, Object credentials) {
         super(principal, credentials);

@@ -1,6 +1,6 @@
-package com.example.demo06.security;
+package com.example.demo0601.security;
 
-import com.example.demo06.model.User;
+import com.example.demo0601.model.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -9,6 +9,9 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
 
+/**
+ * @author Administrator
+ */
 @Component
 public class AuthenticationServerProxy {
 

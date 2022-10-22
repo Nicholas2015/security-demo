@@ -1,4 +1,4 @@
-package com.example.demo06.model;
+package com.example.demo0601.model;
 
 import lombok.Data;
 
@@ -9,7 +9,7 @@ import javax.persistence.Id;
 
 @Data
 @Entity
-public class User {
+public class Otp {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,5 +17,5 @@ public class User {
 
     private String username;
 
-    private String password;
+    private String code;
 }

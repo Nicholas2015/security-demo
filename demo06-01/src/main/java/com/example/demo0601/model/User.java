@@ -1,4 +1,4 @@
-package com.example.demo06.model;
+package com.example.demo0601.model;
 
 import lombok.Data;
 
@@ -18,4 +18,6 @@ public class User {
     private String username;
 
     private String password;
+
+    private String code;
 }

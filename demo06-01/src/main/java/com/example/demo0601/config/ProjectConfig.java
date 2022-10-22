@@ -1,4 +1,4 @@
-package com.example.demo06.config;
+package com.example.demo0601.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,7 +10,7 @@ import org.springframework.web.client.RestTemplate;
 public class ProjectConfig {
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
     }
 }
